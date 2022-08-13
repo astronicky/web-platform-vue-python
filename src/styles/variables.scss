@@ -1,0 +1,61 @@
+/* ---
+Variables
+--- */
+
+:root {
+
+  --transition-short:           150ms;
+  --transition-medium:          250ms;
+  --transition-long:            750ms;
+
+  --c-gray-100:          hsl(230, 5%, 97%);
+  --c-gray-200:          hsl(230, 5%, 92%);
+  --c-gray-300:          hsl(230, 4%, 80%);
+  --c-gray-400:          hsl(230, 4%, 64%);
+  --c-gray-500:          hsl(230, 3%, 50%);
+  --c-gray-600:          hsl(230, 3%, 36%);
+  --c-gray-700:          hsl(230, 2%, 22%);
+  --c-gray-800:          hsl(230, 2%, 13%);
+  --c-gray-900:          hsl(230, 2%, 07%);
+
+  --c-primary-100:       hsl(190, 70%, 97%);
+  --c-primary-200:       hsl(192, 70%, 92%);
+  --c-primary-300:       hsl(195, 69%, 82%);
+  --c-primary-400:       hsl(196, 68%, 65%);
+  --c-primary-500:       hsl(200, 67%, 50%);
+  --c-primary-600:       hsl(208, 66%, 36%);
+  --c-primary-700:       hsl(216, 65%, 22%);
+  --c-primary-800:       hsl(227, 64%, 14%);
+  --c-primary-900:       hsl(240, 63%, 08%);
+
+  --c-success-100:       hsl(105, 93%, 96%);
+  --c-success-200:       hsl(110, 93%, 91%);
+  --c-success-300:       hsl(115, 93%, 80%);
+  --c-success-400:       hsl(120, 93%, 67%);
+  --c-success-500:       hsl(125, 92%, 44%);
+  --c-success-600:       hsl(130, 91%, 33%);
+  --c-success-700:       hsl(135, 89%, 23%);
+  --c-success-800:       hsl(140, 84%, 12%);
+  --c-success-900:       hsl(145, 80%, 07%);
+
+  --c-info-100:          hsl(38, 97%, 97%);
+  --c-info-200:          hsl(40, 96%, 92%);
+  --c-info-300:          hsl(42, 95%, 82%);
+  --c-info-400:          hsl(44, 94%, 68%);
+  --c-info-500:          hsl(46, 93%, 50%);
+  --c-info-600:          hsl(48, 93%, 36%);
+  --c-info-700:          hsl(54, 86%, 21%);
+  --c-info-800:          hsl(54, 82%, 09%);
+  --c-info-900:          hsl(58, 80%, 05%);
+
+  --c-danger-100:        hsl(010, 95%, 97%);
+  --c-danger-200:        hsl(009, 94%, 93%);
+  --c-danger-300:        hsl(008, 92%, 80%);
+  --c-danger-400:        hsl(007, 90%, 68%);
+  --c-danger-500:        hsl(006, 87%, 50%);
+  --c-danger-600:        hsl(002, 85%, 36%);
+  --c-danger-700:        hsl(355, 83%, 22%);
+  --c-danger-800:        hsl(344, 80%, 12%);
+  --c-danger-900:        hsl(333, 78%, 07%);
+
+}

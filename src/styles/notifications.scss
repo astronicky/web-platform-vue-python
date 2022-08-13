@@ -1,0 +1,136 @@
+.app-notifications {
+  margin: 0 1rem .5rem 0;
+
+  // .notification-title {
+  //   // Style for title line
+  // }
+
+  .notification-content {
+    font-size: 1.6rem;
+  }
+
+  .vue-notification {
+    display: flex;
+
+    &:before {
+      content: '\f06a';
+      font-family: 'Font Awesome 5 Solid';
+      font-weight: 900;
+      font-size: 1.6rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .default {
+
+    background: var(--c-gray-200);
+    color: var(--c-gray-900);
+    border-left: .4rem solid var(--c-gray-500);
+    box-shadow: 0rem .1rem .25rem var(--c-gray-500);
+    &:before {
+      content: '\F06A';
+      color: var(--c-gray-700);
+    }
+  }
+
+  .primary,
+  .save {
+    background: var(--c-primary-200);
+    color: var(--c-primary-900);
+    border-left: .4rem solid var(--c-primary-500);
+    box-shadow: 0rem .1rem .25rem var(--c-primary-500);
+    &:before {
+      content: '\f058';
+      color: var(--c-primary-500);
+    }
+  }
+
+  .primary:before { content: '\f058'; }
+  .save:before { content: '\f0c7'; }
+
+
+  .danger {
+    background: var(--c-danger-200);
+    color: var(--c-danger-900);
+    border-left: .4rem solid var(--c-danger-500);
+    box-shadow: 0rem .1rem .25rem var(--c-danger-500);
+    &:before {
+      content: '\F071';
+      color: var(--c-danger-500);
+    }
+  }
+
+
+  .success {
+    background: var(--c-success-200);
+    color: var(--c-success-900);
+    border-left: .4rem solid var(--c-success-500);
+    box-shadow: 0rem .1rem .25rem var(--c-success-500);
+    &:before {
+      content: '\f058';
+      color: var(--c-success-700);
+    }
+  }
+
+
+
+  &.my-type {
+    /*
+    Style for specific type of notification, will be applied when you
+    call notification with "type" parameter:
+    this.$notify({ type: 'my-type', message: 'Foo' })
+    */
+  }
+}
+
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+  .app-notifications {
+
+    .default {
+      background: var(--c-gray-900);
+      color: var(--c-gray-200);
+      border-left: .4rem solid var(--c-gray-400);
+      box-shadow: none;
+      &:before {
+        content: '\F06A';
+        color: var(--c-gray-200);
+      }
+    }
+
+    .primary,
+    .save {
+      background: var(--c-primary-900);
+      color: var(--c-primary-200);
+      border-left: .4rem solid var(--c-primary-400);
+      box-shadow: none;
+      &:before {
+        color: var(--c-primary-200);
+      }
+    }
+
+    .danger {
+      background: var(--c-danger-900);
+      color: var(--c-danger-200);
+      border-left: .4rem solid var(--c-danger-400);
+      box-shadow: none;
+      &:before {
+        color: var(--c-danger-200);
+      }
+    }
+
+
+    .success {
+      background: var(--c-success-900);
+      color: var(--c-success-200);
+      border-left: .4rem solid var(--c-success-400);
+      box-shadow: none;
+      &:before {
+        color: var(--c-success-200);
+      }
+    }
+  }
+
+}

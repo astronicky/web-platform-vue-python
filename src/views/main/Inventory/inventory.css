@@ -1,0 +1,99 @@
+.search {
+    width: 100%;
+    display: flex;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    height: 30px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+    margin-top: 4px;
+  }
+  
+  .searchTerm:focus{
+    color: #062024;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /*Resize the wrap to see the search bar change!*/
+  .wrap{
+    width: 90%;
+  }
+
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    /* height: 500px; */
+    /* overflow-y: scroll; */
+    /* overflow: scroll; */
+}
+
+.styled-table thead tr {
+    background-color: #8fe5ec;
+    color: #020202;
+    text-align: left;
+}
+.styled-table tr:nth-child(even){background-color: rgb(235, 232, 232);}
+
+.styled-table tr:hover { background-color: rgb(221, 255, 231); }
+.styled-table td:hover { 
+    background-color: #f7f390;
+    color: #403E10;
+    font-weight: bold;
+    
+    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+    
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+ }
+
+ .tagContent {
+  background: #ddd;
+  border: 1px solid #ccc;
+  color: #333;
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 5px 0 5px;
+  margin: 0 5px;
+  text-decoration: none;
+  -webkit-transition: color 0.1s;
+  width: 15ch;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tagContent:hover {
+  background-color: #3c3c3c;
+  color: white;
+}
+
+span:hover a:before {
+  background-color: #ffffff;
+}
+span:hover a:after {
+  background-color: #ffffff;
+}

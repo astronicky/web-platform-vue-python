@@ -1,0 +1,38 @@
+/* ---
+Animations
+--- */
+
+/* Route Transitions */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all var(--transition-short) ease-in-out;
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave {
+  transform: translateX(0rem);
+  opacity: 1;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(.35rem);
+  opacity: 0;
+}
+
+
+/* All */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--transition-short) ease;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

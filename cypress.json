@@ -1,0 +1,5 @@
+{
+  "supportFile": "cypress/support/index.ts",
+  "projectId": "pcitq1",
+  "integrationFolder": "cypress/integration"
+}

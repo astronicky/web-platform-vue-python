@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "ES2015",
+    "module": "esNext",
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "webpack-env",
+      "cypress",
+      "auth0-js"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@casl/vue/patch": [
+        "src/shims-ability.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "src/types.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "test/**/*.ts",
+    "tests/**/*.ts",
+    "cypress/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

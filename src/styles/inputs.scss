@@ -1,0 +1,422 @@
+/* ---
+Inputs
+--- */
+
+label {
+  font-weight: 700;
+}
+
+input,
+select,
+textarea,
+label {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 0.8rem 1rem;
+  margin: 0;
+  transition: var(--transition-short) all;
+}
+
+input,
+select,
+textarea {
+  line-height: 1.2;
+  box-shadow: inset 0 .1rem .2rem var(--c-gray-200);
+  border: .1rem solid var(--c-primary-700);
+  border-radius: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+::placeholder {
+  color: var(--c-gray-400);
+  opacity: 1;
+}
+
+input:hover,
+input:active,
+input:focus,
+select:hover,
+select:active,
+select:focus,
+textarea:hover,
+textarea:active,
+textarea:focus {
+  border: .1rem solid var(--c-primary-500);
+  box-shadow: 0rem 0rem 0rem .15rem var(--c-primary-500);
+  transition: var(--transition-short) all;
+}
+
+/* Disabled */
+/* TODO: Add rest of disabled inputs */
+
+input.disabled,
+input[disabled],
+select.disabled,
+select[disabled],
+textarea.disabled,
+textarea[disabled] {
+  color: var(--c-gray-900);
+  background: var(--c-gray-200);
+  box-shadow: none;
+}
+
+/* Read Only */
+input.readonly,
+input[readonly],
+select.readonly,
+select[readonly],
+textarea.readonly,
+textarea[readonly] {
+  background: var(--c-gray-200);
+}
+
+/* TODO: Add rest of invalid inputs */
+input.invalid,
+select.invalid,
+textarea.invalid {
+  background-color: var(--c-danger-200);
+  border-color: var(--c-danger-500);
+}
+
+select,
+select:hover,
+select option {
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}
+
+label,
+legend {
+  text-align: left;
+}
+
+@media (min-width: 576px) {
+  label,
+  legend {
+    text-align: right;
+  }
+}
+
+/* ---
+Input sizes
+--- */
+input.small,
+select.small,
+textarea.small,
+.small label {
+  padding: 0.5rem 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+
+/* ---
+Checkbox and Radio
+--- */
+
+input[type="checkbox"],
+input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+  width: inherit;
+}
+
+input[type="checkbox"]+label,
+input[type="radio"]+label {
+  text-align: left;
+  position: relative;
+}
+
+input[type="checkbox"],
+input[type="checkbox"]+label,
+input[type="radio"],
+input[type="radio"]+label {
+  // display: flex;
+  // vertical-align: middle;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-short);
+}
+
+input[type="checkbox"]+label:before,
+input[type="radio"]+label:before {
+  content: '';
+  background: var(--c-gray-100);
+  border: .1rem solid var(--c-gray-400);
+  display: inline-block;
+  vertical-align: text-top;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  text-align: center;
+  transition: all var(--transition-short);
+}
+
+input[type="radio"]+label:before {
+  border-radius: 50%;
+}
+
+/* Small */
+.small input[type="checkbox"]+label:before,
+.small input[type="radio"]+label:before {
+  content: '';
+  flex: 0 0 1.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+
+/* Hover */
+
+input[type="checkbox"]:hover+label:before,
+input[type="checkbox"]:focus+label:before,
+input[type="radio"]:hover+label:before,
+input[type="radio"]:focus+label:before {
+  background: var(--c-primary-200);
+  box-shadow: inset 0 0 0 .1rem var(--c-primary-700);
+  transition: all var(--transition-short);
+}
+
+/* Checked */
+
+input[type="checkbox"]:checked+label:before {
+  background: var(--c-primary-500);
+  box-shadow: inset 0 0 0 .2rem var(--c-gray-100);
+}
+
+input[type="radio"]:checked+label:before {
+  background: var(--c-primary-500);
+  box-shadow: inset 0 0 0 .2rem var(--c-gray-100);
+}
+
+/* Checked Hover */
+
+input[type="checkbox"]:checked:hover+label:before,
+input[type="checkbox"]:checked:focus+label:before {
+  background: var(--c-primary-500);
+  box-shadow: inset 0 0 0 .2rem var(--c-primary-700);
+  transition: all var(--transition-short);
+}
+
+input[type="radio"]:checked:hover+label:before,
+input[type="radio"]:checked:focus+label:before {
+  background: var(--c-primary-500);
+  box-shadow: inset 0 0 0 .2rem var(--c-primary-700);
+  transition: all var(--transition-short);
+}
+
+
+/* Invalid */
+
+input[type="checkbox"].invalid+label:before,
+input[type="radio"].invalid+label:before {
+  border: .1rem solid var(--c-danger-700);
+}
+
+input[type="checkbox"].invalid+label:before {
+  background: var(--c-danger-400);
+  box-shadow: inset 0 0 0 .2rem var(--c-gray-100);
+}
+
+input[type="radio"].invalid+label:before {
+  background: var(--c-danger-400);
+  box-shadow: inset 0 0 0 .2rem var(--c-gray-100);
+}
+
+input[type="checkbox"]:hover.invalid+label:before,
+input[type="checkbox"]:focus.invalid+label:before,
+input[type="radio"]:hover.invalid+label:before,
+input[type="radio"]:focus.invalid+label:before {
+  box-shadow: inset 0 0 0 .1rem var(--c-danger-700);
+  transition: all var(--transition-short);
+}
+
+/* Disabled */
+input[type="checkbox"][disabled]+label,
+input[type="radio"][disabled]+label {
+  cursor: default;
+  color: var(--c-gray-400);
+  pointer-events: none;
+}
+
+input[type="checkbox"][disabled]+label:before,
+input[type="radio"][disabled]+label:before {
+  box-shadow: inset 0 0 0 .2rem var(--c-gray-100);
+  background: var(--c-gray-200);
+}
+
+/* Checked Disabled */
+input[type="checkbox"][checked][disabled]+label:before,
+input[type="radio"][checked][disabled]+label:before {
+  background: var(--c-gray-500);
+}
+
+
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+
+  ::placeholder,
+  option:checked {
+    color: var(--c-gray-500);
+    opacity: 1;
+  }
+
+  input,
+  select,
+  textarea {
+    box-shadow: none;
+    border: .1rem solid var(--c-primary-400);
+    background-color: var(--c-gray-900);
+    color: var(--c-gray-200);
+  }
+
+  input:hover,
+  input:active,
+  input:focus,
+  select:hover,
+  select:active,
+  select:focus,
+  textarea:hover,
+  textarea:active,
+  textarea:focus {
+    box-shadow: 0rem 0rem 0rem .15rem var(--c-primary-500);
+  }
+
+  /* Disabled */
+  /* TODO: Add rest of disabled inputs */
+
+  input.disabled,
+  input[disabled],
+  select.disabled,
+  select[disabled],
+  textarea.disabled,
+  textarea[disabled] {
+    color: var(--c-gray-900);
+    background: var(--c-gray-500);
+    box-shadow: none;
+  }
+
+  /* Read Only */
+  input.readonly,
+  input[readonly],
+  select.readonly,
+  select[readonly],
+  textarea.readonly,
+  textarea[readonly] {
+    background: var(--c-gray-900);
+  }
+
+  /* TODO: Add rest of invalid inputs */
+  input.invalid,
+  select.invalid,
+  textarea.invalid {
+    background-color: var(--c-danger-900);
+    border-color: var(--c-danger-500);
+  }
+
+
+
+  /* ---
+  Checkbox and Radio
+  --- */
+
+  input[type="checkbox"]+label:before,
+  input[type="radio"]+label:before {
+    background: var(--c-gray-900);
+    border: .1rem solid var(--c-gray-200);
+  }
+
+
+  /* Hover */
+
+  input[type="checkbox"]:hover+label:before,
+  input[type="checkbox"]:focus+label:before,
+  input[type="radio"]:hover+label:before,
+  input[type="radio"]:focus+label:before {
+    background: var(--c-primary-700);
+    box-shadow: inset 0 0 0 .1rem var(--c-primary-400);
+  }
+
+  /* Checked */
+
+  input[type="checkbox"]:checked+label:before {
+    background: var(--c-primary-400);
+    box-shadow: inset 0 0 0 .2rem var(--c-gray-900);
+  }
+
+  input[type="radio"]:checked+label:before {
+    background: var(--c-primary-400);
+    box-shadow: inset 0 0 0 .2rem var(--c-gray-900);
+  }
+
+  /* Checked Hover */
+
+  input[type="checkbox"]:checked:hover+label:before,
+  input[type="checkbox"]:checked:focus+label:before {
+    background: var(--c-primary-500);
+    box-shadow: inset 0 0 0 .2rem var(--c-primary-700);
+  }
+
+  input[type="radio"]:checked:hover+label:before,
+  input[type="radio"]:checked:focus+label:before {
+    background: var(--c-primary-500);
+    box-shadow: inset 0 0 0 .2rem var(--c-primary-700);
+  }
+
+
+  /* Invalid */
+
+  input[type="checkbox"].invalid+label:before,
+  input[type="radio"].invalid+label:before {
+    border: .1rem solid var(--c-danger-700);
+  }
+
+  input[type="checkbox"].invalid+label:before {
+    background: var(--c-danger-400);
+    box-shadow: inset 0 0 0 .2rem var(--c-gray-900);
+  }
+
+  input[type="radio"].invalid+label:before {
+    background: var(--c-danger-400);
+    box-shadow: inset 0 0 0 .2rem var(--c-gray-900);
+  }
+
+  input[type="checkbox"]:hover.invalid+label:before,
+  input[type="checkbox"]:focus.invalid+label:before,
+  input[type="radio"]:hover.invalid+label:before,
+  input[type="radio"]:focus.invalid+label:before {
+    box-shadow: inset 0 0 0 .1rem var(--c-danger-700);
+  }
+
+  /* Disabled */
+  input[type="checkbox"][disabled]+label,
+  input[type="radio"][disabled]+label {
+    color: var(--c-gray-500);
+  }
+
+  input[type="checkbox"][disabled]+label:before,
+  input[type="radio"][disabled]+label:before {
+    box-shadow: inset 0 0 0 .2rem var(--c-gray-900);
+    background: var(--c-gray-900);
+  }
+
+  /* Checked Disabled */
+  input[type="checkbox"][checked][disabled]+label:before,
+  input[type="radio"][checked][disabled]+label:before {
+    background: var(--c-gray-500);
+  }
+
+
+}
+
+/* Compact UI */
+
+// [compact-ui] {}

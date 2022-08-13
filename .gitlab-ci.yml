@@ -1,0 +1,166 @@
+stages:
+  # - test
+  - code quality
+  - build staging
+  - deploy staging
+  - build demo
+  - deploy demo
+  - build production
+  - deploy production
+
+variables:
+  PROD_S3_BUCKET_NAME: "app.cascadeo.io/"
+  PROD_CLOUDFRONT_ID: "EZWR6810Y8ZT6"
+  STAGING_S3_BUCKET_NAME: "client.staging.cascadeo.io/"
+  STAGING_CLOUDFRONT_ID: "E15DCLPZF8KWA"
+  DEMO_S3_BUCKET_NAME: "client.demo.cascadeo.io/"
+  DEMO_CLOUDFRONT_ID: "E1GSCQZ8JYU88U"
+
+before_script:
+  # Configure ssh for git@gitlab access
+  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
+
+tslint:
+  stage: code quality
+  image: node:12
+  script:
+    - npm install --progress=false
+    - npm run lint
+
+
+build_staging:
+  stage: build staging
+  image: node:12
+  script:
+    - npm install --progress=false
+    - npm run build-staging
+  artifacts:
+    expire_in: 6 months
+    paths:
+      - dist
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_REF_NAME =~ /(staging)/"
+      when: on_success
+    - when: manual
+
+deploy_staging:
+  stage: deploy staging
+  image: python:latest
+  script:
+  - export AWS_ACCESS_KEY_ID=$STAGING_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$STAGING_AWS_SECRET_ACCESS_KEY
+  - pip install awscli
+  - cd dist
+  - aws s3 rm s3://$STAGING_S3_BUCKET_NAME --recursive
+  - aws s3 cp . s3://$STAGING_S3_BUCKET_NAME --recursive
+  - export AWS_ACCESS_KEY_ID=$MANAGEMENT_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$MANAGEMENT_AWS_SECRET_ACCESS_KEY
+  - aws cloudfront create-invalidation --distribution-id $STAGING_CLOUDFRONT_ID --paths '/*'
+  dependencies:
+    - build_staging
+  environment:
+    name: staging
+    url: https://client.staging.cascadeo.io/
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_TAG != null || ($CI_COMMIT_REF_NAME =~ /(staging|release-*)/)"
+      when: on_success
+    - when: manual
+
+
+build_demo:
+  stage: build demo
+  image: node:12
+  script:
+    - npm install --progress=false
+    - npm run build-demo
+  artifacts:
+    expire_in: 6 months
+    paths:
+      - dist
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_TAG != null || ($CI_COMMIT_REF_NAME =~ /(staging|release-*)/)"
+      when: on_success
+    - when: never
+
+deploy_demo:
+  stage: deploy demo
+  image: python:latest
+  dependencies:
+    - build_demo
+  script:
+  - export AWS_ACCESS_KEY_ID=$STAGING_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$STAGING_AWS_SECRET_ACCESS_KEY
+  - pip install awscli
+  - cd dist
+  - aws s3 rm s3://$DEMO_S3_BUCKET_NAME --recursive
+  - aws s3 cp . s3://$DEMO_S3_BUCKET_NAME --recursive
+  - export AWS_ACCESS_KEY_ID=$MANAGEMENT_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$MANAGEMENT_AWS_SECRET_ACCESS_KEY
+  - aws cloudfront create-invalidation --distribution-id $DEMO_CLOUDFRONT_ID --paths '/*'
+  environment:
+    name: demo
+    url: https://client.demo.cascadeo.io/
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_TAG != null || $CI_COMMIT_REF_NAME =~ /(release-*)/"
+      when: on_success
+    - if: "$CI_COMMIT_REF_NAME =~ /(staging)/"
+      when: manual
+    - when: never
+
+build_prod:
+  stage: build production
+  image: node:12
+  script:
+    - npm install --progress=false
+    - npm run build
+  artifacts:
+    expire_in: 6 months
+    paths:
+      - dist
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_TAG != null"
+      when: on_success
+    - when: never
+
+
+deploy_prod:
+  stage: deploy production
+  image: python:latest
+  dependencies:
+    - build_prod
+  script:
+  - export AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
+  - pip install awscli
+  - cd dist
+  - aws s3 rm s3://$PROD_S3_BUCKET_NAME --recursive
+  - aws s3 cp . s3://$PROD_S3_BUCKET_NAME --recursive
+  - export AWS_ACCESS_KEY_ID=$MANAGEMENT_AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$MANAGEMENT_AWS_SECRET_ACCESS_KEY
+  - aws cloudfront create-invalidation --distribution-id $PROD_CLOUDFRONT_ID --paths '/*'
+  environment:
+    name: production
+    url: https://client.prod.cascadeo.io/
+  rules:
+    - if: "$CI_MERGE_REQUEST_ID"
+      when: never
+    - if: "$CI_COMMIT_TAG != null"
+      when: manual
+    - when: never
+
+
