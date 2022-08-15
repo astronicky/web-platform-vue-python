@@ -5,8 +5,8 @@ const inventorymgmt = {
   supportedProviders(): object {
     return {
       'Amazon Web Services': 'Amazon Web Services',
-      // 'Google Cloud Platform': 'Google Cloud Platform',
-      // 'Microsoft Azure': 'Microsoft Azure',
+      'Google Cloud Platform': 'Google Cloud Platform',
+      'Microsoft Azure': 'Microsoft Azure',
     };
   },
 
